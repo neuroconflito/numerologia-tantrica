@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculadora de Numerologia Tântrica — Holo Sartori</title>
+
+  <!-- Fonts & Tailwind -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root { --brand: #2563eb; }
+    body { font-family: 'Inter', sans-serif; background: #f3f4f6; }
+    /* Pré-visualização P&B (ativada por classe .bw no <body>) */
+    .bw .color-accent { color:#111 !important; }
+    .bw .border-accent { border-color:#111 !important; }
+    .bw .bg-accent { background:#111 !important; }
+    .bw .shadow-xl, .bw .shadow-md, .bw .shadow-sm { box-shadow:none !important; }
+    .bw .text-blue-600 { color:#111 !important; }
+    .bw .text-green-700 { color:#111 !important; }
+    .bw .text-rose-700 { color:#111 !important; }
+    .bw .border-gray-200 { border-color:#111 !important; }
+    .bw .text-gray-700, .bw .text-gray-800, .bw .text-gray-600 { color:#111 !important; }
+    /* Estilo para impressão – sempre P&B e limpo */
+    @media print {
+      body { background:#fff !important; }
+      .no-print { display:none !important; }
+      .shadow-xl, .shadow-md, .shadow-sm { box-shadow:none !important; }
+      .text-blue-600, .text-green-700, .text-rose-700 { color:#000 !important; }
+      .border-gray-200 { border-color:#000 !important; }
+      .print\\:block { display:block !important; }
+      .print\\:grayscale { filter: grayscale(100%) !important; }
+      a::after { content:" (" attr(href) ")"; font-size:10px; }
+    }
+  </style>
+</head>
+<body class="p-4 min-h-screen flex items-center justify-center">
+  <div class="bg-white p-6 md:p-10 rounded-2xl shadow-xl max-w-4xl w-full">
+    <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2 text-center">Calculadora de Numerologia Tântrica</h1>
+    <p class="text-gray-600 mb-6 text-center">
+      Calcule seus números de <strong>Dia</strong>, <strong>Mês</strong>, <strong>Ano</strong> e <strong>Total</strong> (redução até 1–11), com pontos positivos, desafios e <strong>práticas & mantras</strong>.
+    </p>
+
+    <!-- Controles -->
+    <div class="grid gap-4 md:grid-cols-[1fr_auto_auto_auto] items-end mb-6">
+      <div class="flex flex-col">
+        <label for="birthdate" class="text-gray-700 text-lg font-semibold mb-2">Sua Data de Nascimento</label>
+        <input type="date" id="birthdate" class="px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"/>
+      </div>
+
+      <button id="calculateButton" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-xl shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">Calcular</button>
+
+      <!-- Toggle Práticas & Mantras -->
+      <label class="flex items-center gap-2 select-none cursor-pointer no-print">
+        <input id="togglePractices" type="checkbox" class="h-5 w-5 accent-blue-600">
+        <span class="text-sm font-semibold text-gray-700">Mostrar práticas & mantras</span>
+      </label>
+
+      <!-- Toggle P&B -->
+      <label class="flex items-center gap-2 select-none cursor-pointer no-print">
+        <input id="toggleBW" type="checkbox" class="h-5 w-5 accent-blue-600">
+        <span class="text-sm font-semibold text-gray-700">Modo Preto & Branco</span>
+      </label>
+    </div>
+
+    <!-- Ações secundárias -->
+    <div class="flex flex-wrap gap-3 mb-4 no-print">
+      <button id="printButton" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-xl shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">Imprimir / Salvar em PDF</button>
+      <button id="clearButton" class="px-4 py-3 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-50 transition">Limpar resultados</button>
+    </div>
+
+    <div id="results" class="mt-2 hidden">
+      <div id="loading" class="flex items-center gap-3 text-blue-600 mb-4">
+        <svg class="animate-spin h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a 8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0 1 4 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <span>Calculando…</span>
+      </div>
+
+      <!-- Cards -->
+      <div id="cardsContainer" class="grid gap-6 md:grid-cols-2"></div>
+
+      <p class="text-xs text-gray-500 mt-6 leading-relaxed">
+        Observação: usa-se a redução numérica até obter um valor entre <strong>1</strong> e <strong>11</strong>. As práticas são sugestões gerais de bem-estar/meditação; não substituem orientação profissional. Ajuste conforme sua tradição e experiência pessoal.
+      </p>
+    </div>
+
+    <!-- Rodapé (tela) -->
+    <footer class="mt-10 pt-6 border-t border-gray-200 text-center no-print">
+      <img src="holosartori.png" alt="Holo Sartori Logo" class="mx-auto h-20 mb-3">
+      <p class="text-gray-700 text-sm font-semibold">Contato:
+        <a href="mailto:holosartori@gmail.com" class="text-blue-600 hover:underline">holosartori@gmail.com</a>
+      </p>
+    </footer>
+
+    <!-- Rodapé (impressão/PDF) -->
+    <footer class="hidden print:block mt-10 pt-4 border-t border-black text-center">
+      <img src="holosartori.png" alt="Holo Sartori Logo" class="mx-auto h-16 mb-2 print:grayscale">
+      <p class="text-black text-sm font-semibold">Contato: holosartori@gmail.com</p>
+    </footer>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const birthdateInput = document.getElementById('birthdate');
+      const calculateButton = document.getElementById('calculateButton');
+      const resultsDiv = document.getElementById('results');
+      const loadingDiv = document.getElementById('loading');
+      const cardsContainer = document.getElementById('cardsContainer');
+      const printButton = document.getElementById('printButton');
+      const clearButton = document.getElementById('clearButton');
+      const toggleBW = document.getElementById('toggleBW');
+      const togglePractices = document.getElementById('togglePractices');
+
+      // Significados + práticas & mantras (1–11)
+      const meanings = {
+        1: {
+          titulo: "1 — Corpo Espiritual / Alma",
+          positivos: ["Autenticidade e criatividade","Liberdade interior e lucidez","Humildade e conexão com o sagrado"],
+          desafiadores: ["Teimosia/isolamento","Frieza emocional","Busca por validação externa"],
+          praticas: [
+            "Respiração longa e profunda (3–11 min).",
+            "Meditação sentada com foco suave no ponto entre as sobrancelhas.",
+            "Diário de autenticidade: 3 insights/dia sobre ‘o que é verdade para mim?’"
+          ],
+          mantra: "Adi Mantra: “Ong Namo Guru Dev Namo” (3–11 min)."
+        },
+        2: {
+          titulo: "2 — Mente Negativa (Proteção/Comunhão)",
+          positivos: ["Afeto e comunhão","Percepção do que não é harmônico","Autonomia afetiva"],
+          desafiadores: ["Receio excessivo","Negação do negativo","Dependência afetiva"],
+          praticas: [
+            "Meditação de proteção: visualize um campo acolhedor ao redor do corpo.",
+            "Escuta empática (5–10 min) com alguém de confiança.",
+            "Autoabraço consciente (1–3 min) para autorregulação."
+          ],
+          mantra: "Mangala Charan: “Aad Guray Nameh…” (3–11 min)."
+        },
+        3: {
+          titulo: "3 — Mente Positiva (Ação/Confiança)",
+          positivos: ["Clareza para agir","Confiança e otimismo","Energia transformadora"],
+          desafiadores: ["Busca por aprovação","Autoritarismo por insegurança","Dificuldade de confiar em si"],
+          praticas: [
+            "Respiração de fogo suave (até 1–3 min, se familiar).",
+            "Planejamento 3-1-1: 3 prioridades, 1 próxima ação, 1 primeiro passo imediato.",
+            "Alongamentos dinâmicos de abertura de peito/ombros (3–5 min)."
+          ],
+          mantra: "“Har” (batida rítmica com as pontas dos dedos, 3–11 min)."
+        },
+        4: {
+          titulo: "4 — Mente Neutra (Integração/Intuição)",
+          positivos: ["Visão holística","Estabilidade e serenidade","Ação intuitiva e imparcial"],
+          desafiadores: ["Oscilar entre polos","Rigidez/indecisão","Controle excessivo"],
+          praticas: [
+            "Respiração quadrada (inspire 4s, segure 4s, expire 4s, segure 4s) por 3–7 min.",
+            "Meditação de observação: note pensamentos sem julgar (5–11 min).",
+            "Caminhada contemplativa em silêncio (10–20 min)."
+          ],
+          mantra: "“Sat Nam” longo (vibração sustentada, 3–11 min)."
+        },
+        5: {
+          titulo: "5 — Corpo Físico (Expressão/Ensino)",
+          positivos: ["Comunicação autêntica","Dedicação a causas elevadas","Vocação para ensinar"],
+          desafiadores: ["Sensação de separação","Apego a validação externa","Transferência de responsabilidade"],
+          praticas: [
+            "Sequência curta de mobilidade articular (5–10 min).",
+            "Leitura em voz alta (3–5 min) para clarear expressão.",
+            "Compartilhar 1 insight por dia com alguém (ensino em micro-dose)."
+          ],
+          mantra: "“Gobinday Mukanday…” (3–11 min)."
+        },
+        6: {
+          titulo: "6 — Corpo Auréola (Foco/Proteção Mental)",
+          positivos: ["Proteção psíquica","Foco e materialização","Congruência e integridade"],
+          desafiadores: ["Dispersão mental","Dificuldade de materializar","Influenciabilidade"],
+          praticas: [
+            "Meditação com vela (tratak) – olhar suave para a chama (3–7 min).",
+            "Lista ‘um foco por vez’ e bloqueio de distrações por 25 min (Pomodoro).",
+            "Revisão de integridade (o que digo x o que faço)."
+          ],
+          mantra: "“Ra Ma Da Sa Sa Say So Hung” (cura e centramento, 3–11 min)."
+        },
+        7: {
+          titulo: "7 — Aura (Segurança/Compaixão)",
+          positivos: ["Segurança interior","Liberação do passado","Compaixão e acolhimento"],
+          desafiadores: ["Sensação de peso","Ressentimento/isolamento","Auto-perturbação"],
+          praticas: [
+            "Banho sonoro/white noise para ‘limpar’ o campo (5–10 min).",
+            "Exercício de perdão (escrita dirigida por 5–10 min).",
+            "Alongamentos suaves + respiração nasal profunda (5–8 min)."
+          ],
+          mantra: "“Wahe Guru” (3–11 min)."
+        },
+        8: {
+          titulo: "8 — Corpo Prânico (Vitalidade/Execução)",
+          positivos: ["Vigor e entusiasmo","Capacidade de realizar","Superação de obstáculos"],
+          desafiadores: ["Desânimo/falta de propósito","Metas difusas","Procrastinação"],
+          praticas: [
+            "Respiração de caixa torácica (inspira expandindo costelas, 3–5 min).",
+            "Micro-treino: 8 minutos de movimento (circuito simples).",
+            "Definir 1 meta clara/dia + prazo curto."
+          ],
+          mantra: "“Har Haray Haree” (fluxo de prosperidade/ação, 3–11 min)."
+        },
+        9: {
+          titulo: "9 — Corpo Sutil (Sutileza/Compreensão)",
+          positivos: ["Leitura fina da realidade","Empatia e serenidade","Compreensão ampliada"],
+          desafiadores: ["Percepções fragmentadas","Mistificação/grosseria","Severidade consigo"],
+          praticas: [
+            "Meditação de contemplação de textos/poemas por 5–10 min.",
+            "Respiração 4–6 (inspira 4s, expira 6s) por 3–7 min.",
+            "Prática de gentileza consigo: 3 frases de autocompaixão."
+          ],
+          mantra: "“Ang Sang Wahe Guru” (presença em todas as células, 3–11 min)."
+        },
+        10: {
+          titulo: "10 — Corpo Radiante (Brilho/Coragem)",
+          positivos: ["Carisma e presença","Proteção natural","Impacto positivo"],
+          desafiadores: ["Oscilar entre exibição/retração","Autoexigência alta","Medo de se expor"],
+          praticas: [
+            "Postura estável (Tadasana) + respiração consciente (3–5 min).",
+            "Prática de voz: ler em pé, projetando (2–3 min).",
+            "Pequeno ato de coragem diário."
+          ],
+          mantra: "“Ek Ong Kar Sat Nam Siri Wahe Guru” (3–7 min)."
+        },
+        11: {
+          titulo: "11 — Totalidade (Síntese/Elevação)",
+          positivos: ["Integração das qualidades","Visão do divino em tudo","Harmonia e equilíbrio"],
+          desafiadores: ["Sobrecarga pela ‘totalidade’","Idealização sem enraizamento","Dificuldade de constância"],
+          praticas: [
+            "Meditação de gratidão (lista de 11 itens).",
+            "Respiração alternada (Nadi Shodhana) 3–7 min.",
+            "Escolher 1 coisa de cada vez (síntese aplicada)."
+          ],
+          mantra: "“Sat Narayan Wahe Guru” (fluxo e equilíbrio, 3–11 min)."
+        }
+      };
+
+      const sumDigits = (num) => String(num).split('').reduce((acc,d)=>acc+Number(d),0);
+      const reduceTo11 = (n) => {
+        let x = n;
+        while (x > 11) x = sumDigits(x);
+        if (x === 0) x = 1;
+        return x;
+      };
+      const calcAll = (dateStr) => {
+        const date = new Date(dateStr + 'T00:00:00');
+        const d = date.getDate();
+        const m = date.getMonth() + 1;
+        const y = date.getFullYear();
+        const numDia   = reduceTo11(sumDigits(d));
+        const numMes   = reduceTo11(sumDigits(m));
+        const numAno   = reduceTo11(sumDigits(y));
+        const numTotal = reduceTo11(sumDigits(d) + sumDigits(m) + sumDigits(y));
+        return { d, m, y, numDia, numMes, numAno, numTotal };
+      };
+
+      const renderCard = (chave, numero, pack, mostrarPraticas) => {
+        const { titulo, positivos, desafiadores, praticas, mantra } = pack;
+        return `
+          <div class="rounded-2xl border border-gray-200 p-5 shadow-sm">
+            <div class="flex items-baseline justify-between mb-3">
+              <h3 class="text-lg font-bold text-gray-800">${chave}</h3>
+              <div class="text-4xl font-extrabold text-blue-600 color-accent">${numero}</div>
+            </div>
+            <p class="text-sm text-gray-700 mb-3 font-semibold">${titulo}</p>
+            <div class="grid gap-3 md:grid-cols-2">
+              <div>
+                <p class="text-xs uppercase tracking-wide text-green-700 font-semibold mb-1">Pontos Positivos</p>
+                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                  ${positivos.map(p => `<li>${p}</li>`).join('')}
+                </ul>
+              </div>
+              <div>
+                <p class="text-xs uppercase tracking-wide text-rose-700 font-semibold mb-1">Pontos Desafiadores</p>
+                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                  ${desafiadores.map(p => `<li>${p}</li>`).join('')}
+                </ul>
+              </div>
+            </div>
+
+            ${mostrarPraticas ? `
+            <div class="mt-4 border-t border-gray-200 pt-3">
+              <p class="text-xs uppercase tracking-wide text-gray-700 font-semibold mb-1">Práticas Sugeridas</p>
+              <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                ${praticas.map(p => `<li>${p}</li>`).join('')}
+              </ul>
+              <p class="mt-2 text-sm text-gray-700"><span class="font-semibold">Mantra:</span> ${mantra}</p>
+            </div>` : ``}
+          </div>
+        `;
+      };
+
+      const showLoading = () => {
+        resultsDiv.classList.remove('hidden');
+        loadingDiv.classList.remove('hidden');
+        cardsContainer.innerHTML = '';
+      };
+      const hideLoading = () => loadingDiv.classList.add('hidden');
+
+      calculateButton.addEventListener('click', () => {
+        const birthdateValue = birthdateInput.value;
+        if (!birthdateValue) { alert('Por favor, selecione sua data de nascimento.'); return; }
+
+        showLoading();
+
+        const { d, m, y, numDia, numMes, numAno, numTotal } = calcAll(birthdateValue);
+
+        const blocoDia   = renderCard(`Número do Dia (${String(d).padStart(2,'0')})`, numDia, meanings[numDia], togglePractices.checked);
+        const blocoMes   = renderCard(`Número do Mês (${String(m).padStart(2,'0')})`, numMes, meanings[numMes], togglePractices.checked);
+        const blocoAno   = renderCard(`Número do Ano (${y})`, numAno, meanings[numAno], togglePractices.checked);
+        const blocoTotal = renderCard(`Número Total (Dia+Mês+Ano)`, numTotal, meanings[numTotal], togglePractices.checked);
+
+        cardsContainer.innerHTML = blocoDia + blocoMes + blocoAno + blocoTotal;
+
+        hideLoading();
+      });
+
+      // Botão imprimir (gera PDF via dialog do navegador)
+      printButton.addEventListener('click', () => window.print());
+
+      // Limpar resultados
+      clearButton.addEventListener('click', () => {
+        cardsContainer.innerHTML = '';
+        resultsDiv.classList.add('hidden');
+      });
+
+      // Toggle P&B
+      toggleBW.addEventListener('change', (e) => {
+        document.body.classList.toggle('bw', e.target.checked);
+      });
+
+      // Se mudar o toggle de práticas, re-render atual
+      togglePractices.addEventListener('change', () => {
+        if (!birthdateInput.value || resultsDiv.classList.contains('hidden')) return;
+        const { d, m, y, numDia, numMes, numAno, numTotal } = calcAll(birthdateInput.value);
+        const blocoDia   = renderCard(`Número do Dia (${String(d).padStart(2,'0')})`, numDia, meanings[numDia], togglePractices.checked);
+        const blocoMes   = renderCard(`Número do Mês (${String(m).padStart(2,'0')})`, numMes, meanings[numMes], togglePractices.checked);
+        const blocoAno   = renderCard(`Número do Ano (${y})`, numAno, meanings[numAno], togglePractices.checked);
+        const blocoTotal = renderCard(`Número Total (Dia+Mês+Ano)`, numTotal, meanings[numTotal], togglePractices.checked);
+        cardsContainer.innerHTML = blocoDia + blocoMes + blocoAno + blocoTotal;
+      });
+    });
+  </script>
+</body>
+</html>
