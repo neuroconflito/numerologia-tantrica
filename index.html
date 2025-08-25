@@ -36,6 +36,11 @@
             <button id="calculateButton" class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-xl shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300">
                 Calcular
             </button>
+
+            <!-- Botão Limpar -->
+            <button id="clearButton" class="w-full bg-gray-400 text-white font-bold py-3 px-6 rounded-xl shadow-md hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 transition duration-300 mt-4">
+                Limpar
+            </button>
         </div>
 
         <div id="results" class="mt-8 pt-6 border-t border-gray-200 hidden">
@@ -73,11 +78,13 @@
         document.addEventListener('DOMContentLoaded', () => {
             const birthdateInput = document.getElementById('birthdate');
             const calculateButton = document.getElementById('calculateButton');
+            const clearButton = document.getElementById('clearButton');  // Botão Limpar
             const resultsDiv = document.getElementById('results');
             const domNumberDiv = document.getElementById('domNumber');
             const interpretationDiv = document.getElementById('interpretation');
             const loadingDiv = document.getElementById('loading');
 
+            // Função de Calcular
             calculateButton.addEventListener('click', () => {
                 const birthdateValue = birthdateInput.value;
                 if (!birthdateValue) {
@@ -114,6 +121,14 @@
 
                 interpretationDiv.innerHTML = separatedSums;
                 generateInterpretation(dom);
+            });
+
+            // Função de Limpar
+            clearButton.addEventListener('click', () => {
+                birthdateInput.value = ''; // Limpar o campo de data
+                resultsDiv.classList.add('hidden'); // Esconder os resultados
+                interpretationDiv.innerHTML = ''; // Limpar a interpretação
+                domNumberDiv.textContent = ''; // Limpar o número do dom
             });
 
             function calculateNumerology(day, month, year) {
@@ -163,5 +178,4 @@
     </script>
 </body>
 </html>
-
 
