@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -45,7 +46,7 @@
 
         <div id="results" class="mt-8 pt-6 border-t border-gray-200 hidden">
             <div class="mb-4">
-                <p class="text-xl md:text-2xl font-bold text-gray-800 mb-2">Seu Número do Dom:</p>
+                <p class="text-xl md:text-2xl font-bold text-gray-800 mb-2">Seu Número de Missão de Vida:</p>
                 <div id="domNumber" class="text-5xl md:text-6xl font-extrabold text-blue-600"></div>
             </div>
 
@@ -112,30 +113,27 @@
                 const yearSum = calculateNumerology(0, 0, year);
                 const totalSum = calculateNumerology(day + month + year, 0, 0);
 
-                const explanation = (sum, area) => {
-                    let explanationText = '';
-                    switch(area) {
-                        case 'day':
-                            explanationText = `O número ${sum} reflete a forma como você se vê, suas qualidades pessoais e sua identidade.`;
-                            break;
-                        case 'month':
-                            explanationText = `O número ${sum} indica a maneira como você interage com o mundo, suas habilidades sociais e a forma de se relacionar com os outros.`;
-                            break;
-                        case 'year':
-                            explanationText = `O número ${sum} mostra o que você recebeu de presente divino, o Dom que vai ajudar a sua evolução.`;
-                            break;
-                        case 'total':
-                            explanationText = `O número ${sum} representa sua Missão de vida, seu maior propósito e o que você está aqui para cumprir.`;
-                            break;
-                    }
-                    return explanationText;
+                // Definir as explicações detalhadas de cada número
+                const getExplanation = (sum) => {
+                    const explanations = {
+                        1: "O número 1 reflete sua identidade e o modo como você se vê.",
+                        2: "O número 2 mostra sua habilidade de se conectar e interagir com os outros.",
+                        3: "O número 3 representa a sua criatividade e expressividade.",
+                        4: "O número 4 está relacionado à disciplina e organização, como você constrói sua vida.",
+                        5: "O número 5 indica sua busca por liberdade e adaptação às mudanças.",
+                        6: "O número 6 reflete sua responsabilidade e cuidado com os outros.",
+                        7: "O número 7 simboliza sabedoria, introspecção e sua busca por conhecimento.",
+                        8: "O número 8 está relacionado à sua capacidade de manifestação e poder pessoal.",
+                        9: "O número 9 representa a compaixão e a busca por um propósito maior.",
+                    };
+                    return explanations[sum] || `O número ${sum} reflete um aspecto importante de sua vida, como sua missão ou propósito.`;
                 };
 
                 const separatedSums = `
-                    <p><strong>Soma do Dia:</strong> ${day} = ${daySum} - ${explanation(daySum, 'day')}</p>
-                    <p><strong>Soma do Mês:</strong> ${month} = ${monthSum} - ${explanation(monthSum, 'month')}</p>
-                    <p><strong>Soma do Ano:</strong> ${year} = ${yearSum} - ${explanation(yearSum, 'year')}</p>
-                    <p><strong>Soma Total:</strong> ${day + month + year} = ${totalSum} - ${explanation(totalSum, 'total')}</p>
+                    <p><strong>Soma do Dia:</strong> ${day} = ${daySum} - ${getExplanation(daySum)}</p>
+                    <p><strong>Soma do Mês:</strong> ${month} = ${monthSum} - ${getExplanation(monthSum)}</p>
+                    <p><strong>Soma do Ano:</strong> ${year} = ${yearSum} - ${getExplanation(yearSum)}</p>
+                    <p><strong>Soma Total:</strong> ${day + month + year} = ${totalSum} - ${getExplanation(totalSum)}</p>
                 `;
 
                 interpretationDiv.innerHTML = separatedSums;
@@ -197,6 +195,3 @@
     </script>
 </body>
 </html>
-
-
-
