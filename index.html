@@ -17,6 +17,9 @@
 </head>
 <body class="p-4 flex items-center justify-center min-h-screen">
     <div class="bg-white p-6 md:p-10 rounded-2xl shadow-xl max-w-lg w-full text-center">
+        <!-- Logo adicionado aqui -->
+        <img src="holosartori.png" alt="Logo Holosartori" class="mx-auto mb-6 w-32 h-32 object-contain">
+
         <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Calculadora de Numerologia</h1>
         <p class="text-gray-600 mb-8">
             Descubra o número do seu dom e seu significado a partir da sua data de nascimento.
@@ -153,3 +156,12 @@
     </script>
 </body>
 </html>
+"""
+
+# Salvar o conteúdo em um novo arquivo HTML
+file_path = '/mnt/data/numerologia_tantrica_calculadora_com_logo.html'
+with open(file_path, 'w') as file:
+    file.write(html_content)
+
+file_path  # Retorna o caminho para download
+
