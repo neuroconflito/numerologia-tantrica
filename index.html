@@ -106,17 +106,36 @@
                 // Display the calculated number
                 domNumberDiv.textContent = dom;
 
-                // Display the separated sums
+                // Display the separated sums with explanations
                 const daySum = calculateNumerology(day, 0, 0);
                 const monthSum = calculateNumerology(0, month, 0);
                 const yearSum = calculateNumerology(0, 0, year);
                 const totalSum = calculateNumerology(day + month + year, 0, 0);
 
+                const explanation = (sum, area) => {
+                    let explanationText = '';
+                    switch(area) {
+                        case 'day':
+                            explanationText = `O número ${sum} reflete a forma como você se vê, suas qualidades pessoais e sua identidade.`;
+                            break;
+                        case 'month':
+                            explanationText = `O número ${sum} indica a maneira como você interage com o mundo, suas habilidades sociais e a forma de se relacionar com os outros.`;
+                            break;
+                        case 'year':
+                            explanationText = `O número ${sum} mostra o que você recebeu de presente divino, o Dom que vai ajudar a sua evolução.`;
+                            break;
+                        case 'total':
+                            explanationText = `O número ${sum} representa sua Missão de vida, seu maior propósito e o que você está aqui para cumprir.`;
+                            break;
+                    }
+                    return explanationText;
+                };
+
                 const separatedSums = `
-                    <p><strong>Soma do Dia:</strong> ${day} = ${daySum}</p>
-                    <p><strong>Soma do Mês:</strong> ${month} = ${monthSum}</p>
-                    <p><strong>Soma do Ano:</strong> ${year} = ${yearSum}</p>
-                    <p><strong>Soma Total:</strong> ${day + month + year} = ${totalSum}</p>
+                    <p><strong>Soma do Dia:</strong> ${day} = ${daySum} - ${explanation(daySum, 'day')}</p>
+                    <p><strong>Soma do Mês:</strong> ${month} = ${monthSum} - ${explanation(monthSum, 'month')}</p>
+                    <p><strong>Soma do Ano:</strong> ${year} = ${yearSum} - ${explanation(yearSum, 'year')}</p>
+                    <p><strong>Soma Total:</strong> ${day + month + year} = ${totalSum} - ${explanation(totalSum, 'total')}</p>
                 `;
 
                 interpretationDiv.innerHTML = separatedSums;
@@ -178,4 +197,6 @@
     </script>
 </body>
 </html>
+
+
 
