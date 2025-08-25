@@ -17,7 +17,7 @@
 </head>
 <body class="p-4 flex items-center justify-center min-h-screen">
     <div class="bg-white p-6 md:p-10 rounded-2xl shadow-xl max-w-lg w-full text-center">
-        <!-- Logo adicionado aqui -->
+        <!-- Logo -->
         <img src="holosartori.png" alt="Logo Holosartori" class="mx-auto mb-6 w-32 h-32 object-contain">
 
         <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Calculadora de Numerologia</h1>
@@ -48,6 +48,7 @@
         </div>
     </div>
 
+    <!-- Explicação das 5 Áreas Fundamentais -->
     <div class="container mx-auto p-6 mt-12">
         <h2 class="text-xl text-gray-800 font-semibold mb-4">Nosso Foco nas Cinco Áreas Fundamentais</h2>
         <p class="text-gray-700 text-base mb-4">
@@ -62,6 +63,7 @@
         </ul>
     </div>
 
+    <!-- Instagram -->
     <div class="text-center mt-8">
         <p class="text-lg text-gray-800">Siga-nos no Instagram para mais dicas e informações sobre Numerologia!</p>
         <a href="https://www.instagram.com/holosartori" target="_blank" class="text-blue-600 font-semibold">Nosso Instagram: @holosartori</a>
@@ -97,13 +99,24 @@
                 // Display the calculated number
                 domNumberDiv.textContent = dom;
 
-                // Call the API to get the interpretation based on the number and the user's provided theory
+                // Display the separated sums
+                const daySum = calculateNumerology(day, 0, 0);
+                const monthSum = calculateNumerology(0, month, 0);
+                const yearSum = calculateNumerology(0, 0, year);
+                const totalSum = calculateNumerology(day + month + year, 0, 0);
+
+                const separatedSums = `
+                    <p><strong>Soma do Dia:</strong> ${day} = ${daySum}</p>
+                    <p><strong>Soma do Mês:</strong> ${month} = ${monthSum}</p>
+                    <p><strong>Soma do Ano:</strong> ${year} = ${yearSum}</p>
+                    <p><strong>Soma Total:</strong> ${day + month + year} = ${totalSum}</p>
+                `;
+
+                interpretationDiv.innerHTML = separatedSums;
                 generateInterpretation(dom);
             });
 
             function calculateNumerology(day, month, year) {
-                // A basic numerology calculation: sum all digits until a single digit is reached.
-                // This can be easily changed when you provide the specific Tantric Numerology rules.
                 const sumDigits = (num) => {
                     let sum = 0;
                     while (num > 0 || sum > 9) {
@@ -122,11 +135,6 @@
             }
 
             async function generateInterpretation(domNumber) {
-                // Placeholder for the theoretical basis you'll provide.
-                // Once you give me the texts for each number (1-9), I'll update this
-                // to use the Gemini API to generate a response based on your theory.
-
-                // This is a placeholder interpretation until you provide the theoretical base.
                 const placeholderTheory = {
                     1: "O número 1 na numerologia tântrica está associado ao aspecto da Alma. Pessoas com este número possuem uma forte conexão com sua essência e identidade. São líderes natos, independentes e criativos. O desafio é não se isolar e aprender a colaborar.",
                     2: "O número 2 representa o Carma. Relacionado com a dualidade e a cooperação, o 2 trata da forma como interagimos com os outros. Pessoas com este número são diplomáticas e sensíveis, mas precisam ter cuidado para não sacrificar suas próprias necessidades em nome da harmonia.",
@@ -138,10 +146,9 @@
                     8: "O número 8 representa a Força Vital. Este número está relacionado à energia e ao poder interior. Pessoas com este número são determinadas e fortes, com grande poder de manifestação. O desafio é usar essa força de forma construtiva, evitando a tirania.",
                     9: "O número 9 simboliza o Aspecto da Missão. Representa o serviço, a compaixão e a busca por um propósito maior. Pessoas com este número são altruístas e inspiradoras. O desafio é aceitar sua missão e servir aos outros com alegria, sem se sobrecarregar."
                 };
-                
-                const interpretationText = placeholderTheory[domNumber] || "Nenhuma interpretação encontrada para este número.";
 
-                interpretationDiv.innerHTML = `<p>${interpretationText}</p>`;
+                const interpretationText = placeholderTheory[domNumber] || "Nenhuma interpretação encontrada para este número.";
+                interpretationDiv.innerHTML += `<p>${interpretationText}</p>`;
                 hideLoading();
             }
 
@@ -156,12 +163,5 @@
     </script>
 </body>
 </html>
-"""
 
-# Salvar o conteúdo em um novo arquivo HTML
-file_path = '/mnt/data/numerologia_tantrica_calculadora_com_logo.html'
-with open(file_path, 'w') as file:
-    file.write(html_content)
-
-file_path  # Retorna o caminho para download
 
