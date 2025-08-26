@@ -77,10 +77,11 @@
                     return;
                 }
 
+                // Corrigindo o problema de fuso horário utilizando os métodos corretos para pegar os valores de dia, mês e ano
                 const date = new Date(birthdateValue);
-                const day = date.getDate(); // Corrigido para pegar o "dia" corretamente
-                const month = date.getMonth() + 1; // Mês
-                const year = date.getFullYear(); // Ano
+                const day = date.getUTCDate(); // Utilizando o método getUTCDate para evitar problemas de fuso horário
+                const month = date.getUTCMonth() + 1; // Método para pegar o mês corretamente
+                const year = date.getUTCFullYear(); // Método para pegar o ano corretamente
 
                 const dom = calculateNumerology(day, month, year);
                 domNumberDiv.textContent = dom;
@@ -128,5 +129,4 @@
 
 </body>
 </html>
-
 
