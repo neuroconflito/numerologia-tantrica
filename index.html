@@ -13,10 +13,20 @@
             font-family: 'Inter', sans-serif;
             background-color: #f3f4f6;
         }
+        /* Ajustes para garantir que o layout seja totalmente responsivo */
+        .container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container img {
+            max-width: 100%;
+        }
     </style>
 </head>
 <body class="p-4 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-6 md:p-10 rounded-2xl shadow-xl max-w-lg w-full text-center">
+    <div class="bg-white p-6 md:p-10 rounded-2xl shadow-xl w-full sm:max-w-full md:max-w-lg text-center">
         <!-- Logo -->
         <img src="holosartori.png" alt="Logo Holosartori" class="mx-auto mb-6 w-32 h-32 object-contain">
 
@@ -194,14 +204,7 @@
     </script>
 </body>
 </html>
-"""
 
-# Salvar o conteúdo totalmente responsivo
-final_responsive_file = '/mnt/data/numerologia_tantrica_responsivo_completo.html'
-with open(final_responsive_file, 'w') as file:
-    file.write(fully_responsive_html_content)
-
-final_responsive_file  # Retorna o caminho para download
 
         });
     </script>
