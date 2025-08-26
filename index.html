@@ -77,12 +77,10 @@
                     return;
                 }
 
-                // Manipulação manual da string para pegar o dia, mês e ano corretamente
-                const dateParts = birthdateValue.split('-'); // Divide a data no formato YYYY-MM-DD
-                const year = parseInt(dateParts[0]); // Ano
-                const month = parseInt(dateParts[1]); // Mês
-                const day = parseInt(dateParts[2]); // Dia
+                // Separando manualmente a data
+                const [year, month, day] = birthdateValue.split('-').map(num => parseInt(num));
 
+                // Exibindo a soma de cada área
                 const dom = calculateNumerology(day, month, year);
                 domNumberDiv.textContent = dom;
 
