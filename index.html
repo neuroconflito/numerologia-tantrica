@@ -1,131 +1,123 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Numerologia Tântrica</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Numerologia Tântrica</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
 
-    <!-- Seção de Introdução: O que é a Numerologia Tântrica -->
-    <section class="bg-blue-600 text-white text-center py-12">
-        <h1 class="text-4xl font-bold mb-4">O que é a Numerologia Tântrica?</h1>
-        <p class="text-lg mb-6">
-            A numerologia tântrica é uma prática que utiliza a data de nascimento para identificar números que representam aspectos profundos da sua vida, personalidade e missão. Esses números fornecem uma compreensão do seu caminho espiritual, do seu propósito e de como você pode se alinhar melhor com seu potencial divino.
-        </p>
-    </section>
+<!-- Introdução -->
+<section class="bg-blue-600 text-white text-center py-12">
+    <h1 class="text-4xl font-bold mb-4">O que é a Numerologia Tântrica?</h1>
+    <p class="text-lg mb-6">
+        A numerologia tântrica utiliza a data de nascimento para identificar números que representam aspectos da sua vida, personalidade e missão. 
+        Esses números mostram seu caminho espiritual, propósito e como alinhar seu potencial divino.
+    </p>
+</section>
 
-    <!-- Landpage com foco nas 5 áreas -->
-    <section class="container mx-auto p-6 mb-12 text-center">
-        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Nosso Foco nas Cinco Áreas Fundamentais</h1>
-        <p class="text-gray-700 text-lg mb-4">
-            O cálculo da numerologia tântrica foca nas cinco áreas fundamentais da sua data de nascimento:
-        </p>
-        <ul class="list-inside list-disc text-lg">
-            <li><strong>Dia de Nascimento:</strong> A "lente" pela qual você se olha, refletindo suas qualidades pessoais.</li>
-            <li><strong>Mês de Nascimento:</strong> A "lente" pela qual você interage com o mundo, representando suas habilidades sociais.</li>
-            <li><strong>Soma dos dois últimos números do ano:</strong> Seu Dom ou "presente divino", trazendo uma característica que você recebeu para evoluir.</li>
-            <li><strong>Soma dos quatro números do ano:</strong> Seu Talento ou "destino", mostrando seu caminho natural ou profissão que melhor se alinha com você.</li>
-            <li><strong>Soma de todos os números da data:</strong> Sua Missão de vida, que é o propósito maior que você está aqui para cumprir.</li>
-        </ul>
-    </section>
+<!-- Cinco Áreas -->
+<section class="container mx-auto p-6 mb-12 text-center">
+    <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Nosso Foco nas Cinco Áreas Fundamentais</h1>
+    <ul class="list-inside list-disc text-lg text-gray-700">
+        <li><strong>Dia de Nascimento:</strong> Como você se vê.</li>
+        <li><strong>Mês de Nascimento:</strong> Como você interage com o mundo.</li>
+        <li><strong>Soma dos dois últimos números do ano:</strong> Seu Dom ou "presente divino".</li>
+        <li><strong>Soma dos quatro números do ano:</strong> Seu Talento ou "destino".</li>
+        <li><strong>Soma de todos os números da data:</strong> Sua Missão de vida.</li>
+    </ul>
+</section>
 
-    <!-- Seção da Calculadora -->
-    <section class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg mt-8">
-        <h2 class="text-3xl font-semibold text-center mb-6">Calculadora de Numerologia</h2>
-        <p class="text-center mb-8">Descubra o número do seu dom e seu significado a partir da sua data de nascimento.</p>
-        <div class="space-y-4">
-            <label for="birthdate" class="block text-lg font-medium">Sua Data de Nascimento</label>
-            <input type="date" id="birthdate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <div class="flex justify-between">
-                <button id="calculateButton" class="w-1/2 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Calcular</button>
-                <button id="clearButton" class="w-1/2 bg-gray-400 text-white py-2 px-4 rounded-lg hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400">Limpar</button>
-            </div>
-        </div>
-        <div id="results" class="mt-8 hidden">
-            <p id="domNumber" class="text-4xl font-bold text-center text-blue-600"></p>
-            <div id="interpretation" class="mt-4 text-lg text-gray-700"></div>
-        </div>
-    </section>
+<!-- Calculadora -->
+<section class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg mt-8">
+    <h2 class="text-3xl font-semibold text-center mb-6">Calculadora de Numerologia</h2>
+    <input type="date" id="birthdate" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <div class="flex justify-between mb-4">
+        <button id="calculateButton" class="w-1/2 bg-blue-600 text-white py-2 rounded-lg mr-2 hover:bg-blue-700">Calcular</button>
+        <button id="clearButton" class="w-1/2 bg-gray-400 text-white py-2 rounded-lg ml-2 hover:bg-gray-500">Limpar</button>
+    </div>
+    <div id="results" class="hidden mt-6">
+        <p id="domNumber" class="text-4xl font-bold text-center text-blue-600 mb-4"></p>
+        <div id="interpretation" class="text-gray-700 text-lg"></div>
+    </div>
+</section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const birthdateInput = document.getElementById('birthdate');
-            const calculateButton = document.getElementById('calculateButton');
-            const clearButton = document.getElementById('clearButton');
-            const resultsDiv = document.getElementById('results');
-            const domNumberDiv = document.getElementById('domNumber');
-            const interpretationDiv = document.getElementById('interpretation');
+<!-- Rodapé -->
+<footer class="bg-gray-800 text-white text-center py-8 mt-12">
+    <img src="holosartori.png" alt="Logo" class="mx-auto w-20 h-20 mb-4">
+    <p>Siga-nos no Instagram!</p>
+    <a href="https://www.instagram.com/holosartori" target="_blank" class="text-blue-400 font-semibold">@holosartori</a>
+</footer>
 
-            const interpretations = {
-                1: "O número 1 reflete sua identidade e o modo como você se vê.",
-                2: "O número 2 mostra sua habilidade de se conectar e interagir com os outros.",
-                3: "O número 3 representa a sua criatividade e expressividade.",
-                4: "O número 4 está relacionado à disciplina e organização, como você constrói sua vida.",
-                5: "O número 5 indica sua busca por liberdade e adaptação às mudanças.",
-                6: "O número 6 reflete sua responsabilidade e cuidado com os outros.",
-                7: "O número 7 simboliza sabedoria, introspecção e sua busca por conhecimento.",
-                8: "O número 8 está relacionado à sua capacidade de manifestação e poder pessoal.",
-                9: "O número 9 representa a compaixão e a busca por um propósito maior."
-            };
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const birthdateInput = document.getElementById('birthdate');
+    const calculateButton = document.getElementById('calculateButton');
+    const clearButton = document.getElementById('clearButton');
+    const resultsDiv = document.getElementById('results');
+    const domNumberDiv = document.getElementById('domNumber');
+    const interpretationDiv = document.getElementById('interpretation');
 
-            calculateButton.addEventListener('click', () => {
-                const birthdateValue = birthdateInput.value;
-                if (!birthdateValue) {
-                    alert('Por favor, selecione sua data de nascimento.');
-                    return;
-                }
+    const interpretations = {
+        1: "O número 1 reflete sua identidade e o modo como você se vê.",
+        2: "O número 2 mostra sua habilidade de se conectar e interagir com os outros.",
+        3: "O número 3 representa a sua criatividade e expressividade.",
+        4: "O número 4 está relacionado à disciplina e organização, como você constrói sua vida.",
+        5: "O número 5 indica sua busca por liberdade e adaptação às mudanças.",
+        6: "O número 6 reflete sua responsabilidade e cuidado com os outros.",
+        7: "O número 7 simboliza sabedoria, introspecção e sua busca por conhecimento.",
+        8: "O número 8 está relacionado à sua capacidade de manifestação e poder pessoal.",
+        9: "O número 9 representa a compaixão e a busca por um propósito maior."
+    };
 
-                // Separando manualmente a data
-                const [year, month, day] = birthdateValue.split('-').map(num => parseInt(num));
+    calculateButton.addEventListener('click', () => {
+        const birthdateValue = birthdateInput.value;
+        if (!birthdateValue) { alert('Selecione sua data de nascimento!'); return; }
 
-                // Exibindo a soma de cada área
-                const dom = calculateNumerology(day, month, year);
-                domNumberDiv.textContent = dom;
+        // Manipulação direta da string YYYY-MM-DD
+        const [year, month, day] = birthdateValue.split('-').map(Number);
 
-                const daySum = calculateNumerology(day, 0, 0); // Soma do Dia
-                const monthSum = calculateNumerology(0, month, 0); // Soma do Mês
-                const yearSum = calculateNumerology(0, 0, year); // Soma do Ano
-                const totalSum = calculateNumerology(day + month + year, 0, 0); // Soma Total
+        const dom = calculateNumerology(day, month, year);
+        domNumberDiv.textContent = dom;
 
-                interpretationDiv.innerHTML = `
-                    <p><strong>Soma do Dia:</strong> ${day} = ${daySum} - ${interpretations[daySum]}</p>
-                    <p><strong>Soma do Mês:</strong> ${month} = ${monthSum} - ${interpretations[monthSum]}</p>
-                    <p><strong>Soma do Ano:</strong> ${year} = ${yearSum} - ${interpretations[yearSum]}</p>
-                    <p><strong>Soma Total:</strong> ${day + month + year} = ${totalSum} - ${interpretations[totalSum]}</p>
-                `;
-                resultsDiv.classList.remove('hidden');
-            });
+        const daySum = calculateNumerology(day, 0, 0);
+        const monthSum = calculateNumerology(0, month, 0);
+        const yearSum = calculateNumerology(0, 0, year);
+        const totalSum = calculateNumerology(day + month + year, 0, 0);
 
-            clearButton.addEventListener('click', () => {
-                birthdateInput.value = '';
-                resultsDiv.classList.add('hidden');
-                interpretationDiv.innerHTML = '';
-                domNumberDiv.textContent = '';
-            });
+        interpretationDiv.innerHTML = `
+            <p><strong>Soma do Dia:</strong> ${day} = ${daySum} - ${interpretations[daySum]}</p>
+            <p><strong>Soma do Mês:</strong> ${month} = ${monthSum} - ${interpretations[monthSum]}</p>
+            <p><strong>Soma do Ano:</strong> ${year} = ${yearSum} - ${interpretations[yearSum]}</p>
+            <p><strong>Soma Total:</strong> ${day + month + year} = ${totalSum} - ${interpretations[totalSum]}</p>
+        `;
 
-            function calculateNumerology(day, month, year) {
-                const sumDigits = (num) => {
-                    let sum = 0;
-                    while (num > 0 || sum > 9) {
-                        if (num === 0) {
-                            num = sum;
-                            sum = 0;
-                        }
-                        sum += num % 10;
-                        num = Math.floor(num / 10);
-                    }
-                    return sum;
-                };
+        resultsDiv.classList.remove('hidden');
+    });
 
-                const total = sumDigits(day) + sumDigits(month) + sumDigits(year);
-                return sumDigits(total);
+    clearButton.addEventListener('click', () => {
+        birthdateInput.value = '';
+        domNumberDiv.textContent = '';
+        interpretationDiv.innerHTML = '';
+        resultsDiv.classList.add('hidden');
+    });
+
+    function calculateNumerology(day, month, year) {
+        const sumDigits = num => {
+            let sum = 0;
+            while (num > 0 || sum > 9) {
+                if (num === 0) { num = sum; sum = 0; }
+                sum += num % 10;
+                num = Math.floor(num / 10);
             }
-        });
-    </script>
-
+            return sum;
+        };
+        return sumDigits(day) + sumDigits(month) + sumDigits(year) > 9 ?
+               sumDigits(sumDigits(day) + sumDigits(month) + sumDigits(year)) :
+               sumDigits(day) + sumDigits(month) + sumDigits(year);
+    }
+});
+</script>
 </body>
 </html>
-
-
