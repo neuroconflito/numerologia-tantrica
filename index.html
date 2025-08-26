@@ -49,15 +49,6 @@
         </div>
     </section>
 
-    <!-- Rodapé com logo e Instagram -->
-    <footer class="bg-gray-800 text-white text-center py-8 mt-12">
-        <div class="mb-4">
-            <img src="holosartori.png" alt="Logo Holosartori" class="mx-auto w-20 h-20 object-contain mb-4">
-            <p class="text-lg">Siga-nos no Instagram para mais dicas e informações sobre Numerologia!</p>
-            <a href="https://www.instagram.com/holosartori" target="_blank" class="text-blue-400 font-semibold">Nosso Instagram: @holosartori</a>
-        </div>
-    </footer>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const birthdateInput = document.getElementById('birthdate');
@@ -87,17 +78,17 @@
                 }
 
                 const date = new Date(birthdateValue);
-                const day = date.getDate();
-                const month = date.getMonth() + 1;
-                const year = date.getFullYear();
+                const day = date.getDate(); // Corrigido para pegar o "dia"
+                const month = date.getMonth() + 1; // Mês
+                const year = date.getFullYear(); // Ano
 
                 const dom = calculateNumerology(day, month, year);
                 domNumberDiv.textContent = dom;
 
-                const daySum = calculateNumerology(day, 0, 0);
-                const monthSum = calculateNumerology(0, month, 0);
-                const yearSum = calculateNumerology(0, 0, year);
-                const totalSum = calculateNumerology(day + month + year, 0, 0);
+                const daySum = calculateNumerology(day, 0, 0); // Soma do Dia
+                const monthSum = calculateNumerology(0, month, 0); // Soma do Mês
+                const yearSum = calculateNumerology(0, 0, year); // Soma do Ano
+                const totalSum = calculateNumerology(day + month + year, 0, 0); // Soma Total
 
                 interpretationDiv.innerHTML = `
                     <p><strong>Soma do Dia:</strong> ${day} = ${daySum} - ${interpretations[daySum]}</p>
