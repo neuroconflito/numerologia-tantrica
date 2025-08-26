@@ -4,94 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Numerologia Tântrica</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-        }
-        .container {
-            width: 100%;
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 20px;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="p-4 flex items-center justify-center min-h-screen">
-    <!-- Landpage com foco nas 5 áreas -->
-    <div class="container mx-auto p-6 mb-12 text-center">
-        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Nosso Foco nas Cinco Áreas Fundamentais</h1>
-        <p class="text-gray-700 text-lg mb-4">
-            O cálculo da numerologia tântrica foca nas cinco áreas fundamentais da sua data de nascimento:
-        </p>
-        <ul class="list-disc pl-5 text-gray-700 text-lg">
+<body class="bg-gray-100">
+
+    <!-- Seção de Introdução -->
+    <section class="bg-blue-600 text-white text-center py-12">
+        <h1 class="text-4xl font-bold mb-4">Nosso Foco nas Cinco Áreas Fundamentais</h1>
+        <p class="text-lg mb-6">O cálculo da numerologia tântrica foca nas cinco áreas fundamentais da sua data de nascimento:</p>
+        <ul class="list-inside list-disc text-lg">
             <li><strong>Dia de Nascimento:</strong> A "lente" pela qual você se olha, refletindo suas qualidades pessoais.</li>
             <li><strong>Mês de Nascimento:</strong> A "lente" pela qual você interage com o mundo, representando suas habilidades sociais.</li>
             <li><strong>Soma dos dois últimos números do ano:</strong> Seu Dom ou "presente divino", trazendo uma característica que você recebeu para evoluir.</li>
             <li><strong>Soma dos quatro números do ano:</strong> Seu Talento ou "destino", mostrando seu caminho natural ou profissão que melhor se alinha com você.</li>
             <li><strong>Soma de todos os números da data:</strong> Sua Missão de vida, que é o propósito maior que você está aqui para cumprir.</li>
         </ul>
-    </div>
+    </section>
 
-    <!-- Calculadora de Numerologia -->
-    <div class="bg-white p-6 md:p-10 rounded-2xl shadow-xl w-full sm:max-w-full md:max-w-lg text-center">
-        <!-- Logo -->
-        <img src="holosartori.png" alt="Logo Holosartori" class="mx-auto mb-6 w-32 h-32 object-contain">
-
-        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Calculadora de Numerologia</h1>
-        <p class="text-gray-600 mb-8">
-            Descubra o número do seu dom e seu significado a partir da sua data de nascimento.
-        </p>
-
-        <div class="space-y-6">
-            <div class="flex flex-col">
-                <label for="birthdate" class="text-gray-700 text-lg font-semibold mb-2">
-                    Sua Data de Nascimento
-                </label>
-                <input type="date" id="birthdate" class="px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+    <!-- Seção da Calculadora -->
+    <section class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg mt-8">
+        <h2 class="text-3xl font-semibold text-center mb-6">Calculadora de Numerologia</h2>
+        <p class="text-center mb-8">Descubra o número do seu dom e seu significado a partir da sua data de nascimento.</p>
+        <div class="space-y-4">
+            <label for="birthdate" class="block text-lg font-medium">Sua Data de Nascimento</label>
+            <input type="date" id="birthdate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="flex justify-between">
+                <button id="calculateButton" class="w-1/2 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Calcular</button>
+                <button id="clearButton" class="w-1/2 bg-gray-400 text-white py-2 px-4 rounded-lg hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400">Limpar</button>
             </div>
-
-            <button id="calculateButton" class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-xl shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300">
-                Calcular
-            </button>
-
-            <!-- Botão Limpar -->
-            <button id="clearButton" class="w-full bg-gray-400 text-white font-bold py-3 px-6 rounded-xl shadow-md hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 transition duration-300 mt-4">
-                Limpar
-            </button>
         </div>
-
-        <div id="results" class="mt-8 pt-6 border-t border-gray-200 hidden">
-            <div class="mb-4">
-                <p class="text-xl md:text-2xl font-bold text-gray-800 mb-2">Seu Número de Missão de Vida:</p>
-                <div id="domNumber" class="text-5xl md:text-6xl font-extrabold text-blue-600"></div>
-            </div>
-
-            <div id="interpretation" class="text-left text-gray-700 leading-relaxed text-sm md:text-base"></div>
+        <div id="results" class="mt-8 hidden">
+            <p id="domNumber" class="text-4xl font-bold text-center text-blue-600"></p>
+            <div id="interpretation" class="mt-4 text-lg text-gray-700"></div>
         </div>
-    </div>
-
-    <!-- Instagram -->
-    <div class="text-center mt-8">
-        <p class="text-lg text-gray-800">Siga-nos no Instagram para mais dicas e informações sobre Numerologia!</p>
-        <a href="https://www.instagram.com/holosartori" target="_blank" class="text-blue-600 font-semibold">Nosso Instagram: @holosartori</a>
-    </div>
+    </section>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const birthdateInput = document.getElementById('birthdate');
             const calculateButton = document.getElementById('calculateButton');
-            const clearButton = document.getElementById('clearButton');  // Botão Limpar
+            const clearButton = document.getElementById('clearButton');
             const resultsDiv = document.getElementById('results');
             const domNumberDiv = document.getElementById('domNumber');
             const interpretationDiv = document.getElementById('interpretation');
-            const loadingDiv = document.getElementById('loading');
 
-            // Função de Calcular
             calculateButton.addEventListener('click', () => {
                 const birthdateValue = birthdateInput.value;
                 if (!birthdateValue) {
@@ -99,59 +55,33 @@
                     return;
                 }
 
-                showLoading();
-
-                // Get the date parts
-                const date = new Date(birthdateValue + 'T00:00:00'); // Add time to avoid timezone issues
+                const date = new Date(birthdateValue);
                 const day = date.getDate();
-                const month = date.getMonth() + 1; // Month is 0-indexed
+                const month = date.getMonth() + 1;
                 const year = date.getFullYear();
 
-                // Calculate the numerology number
                 const dom = calculateNumerology(day, month, year);
-
-                // Display the calculated number
                 domNumberDiv.textContent = dom;
 
-                // Display the separated sums with explanations
                 const daySum = calculateNumerology(day, 0, 0);
                 const monthSum = calculateNumerology(0, month, 0);
                 const yearSum = calculateNumerology(0, 0, year);
                 const totalSum = calculateNumerology(day + month + year, 0, 0);
 
-                // Definir as explicações detalhadas de cada número
-                const getExplanation = (sum) => {
-                    const explanations = {
-                        1: "O número 1 reflete sua identidade e o modo como você se vê.",
-                        2: "O número 2 mostra sua habilidade de se conectar e interagir com os outros.",
-                        3: "O número 3 representa a sua criatividade e expressividade.",
-                        4: "O número 4 está relacionado à disciplina e organização, como você constrói sua vida.",
-                        5: "O número 5 indica sua busca por liberdade e adaptação às mudanças.",
-                        6: "O número 6 reflete sua responsabilidade e cuidado com os outros.",
-                        7: "O número 7 simboliza sabedoria, introspecção e sua busca por conhecimento.",
-                        8: "O número 8 está relacionado à sua capacidade de manifestação e poder pessoal.",
-                        9: "O número 9 representa a compaixão e a busca por um propósito maior.",
-                    };
-                    return explanations[sum] || `O número ${sum} reflete um aspecto importante de sua vida, como sua missão ou propósito.`;
-                };
-
-                const separatedSums = `
-                    <p><strong>Soma do Dia:</strong> ${day} = ${daySum} - ${getExplanation(daySum)}</p>
-                    <p><strong>Soma do Mês:</strong> ${month} = ${monthSum} - ${getExplanation(monthSum)}</p>
-                    <p><strong>Soma do Ano:</strong> ${year} = ${yearSum} - ${getExplanation(yearSum)}</p>
-                    <p><strong>Soma Total:</strong> ${day + month + year} = ${totalSum} - ${getExplanation(totalSum)}</p>
+                interpretationDiv.innerHTML = `
+                    <p><strong>Soma do Dia:</strong> ${day} = ${daySum}</p>
+                    <p><strong>Soma do Mês:</strong> ${month} = ${monthSum}</p>
+                    <p><strong>Soma do Ano:</strong> ${year} = ${yearSum}</p>
+                    <p><strong>Soma Total:</strong> ${day + month + year} = ${totalSum}</p>
                 `;
-
-                interpretationDiv.innerHTML = separatedSums;
-                generateInterpretation(dom);
+                resultsDiv.classList.remove('hidden');
             });
 
-            // Função de Limpar
             clearButton.addEventListener('click', () => {
-                birthdateInput.value = ''; // Limpar o campo de data
-                resultsDiv.classList.add('hidden'); // Esconder os resultados
-                interpretationDiv.innerHTML = ''; // Limpar a interpretação
-                domNumberDiv.textContent = ''; // Limpar o número do dom
+                birthdateInput.value = '';
+                resultsDiv.classList.add('hidden');
+                interpretationDiv.innerHTML = '';
+                domNumberDiv.textContent = '';
             });
 
             function calculateNumerology(day, month, year) {
@@ -171,41 +101,10 @@
                 const total = sumDigits(day) + sumDigits(month) + sumDigits(year);
                 return sumDigits(total);
             }
-
-            async function generateInterpretation(domNumber) {
-                const placeholderTheory = {
-                    1: "O número 1 na numerologia tântrica está associado ao aspecto da Alma. Pessoas com este número possuem uma forte conexão com sua essência e identidade. São líderes natos, independentes e criativos. O desafio é não se isolar e aprender a colaborar.",
-                    2: "O número 2 representa o Carma. Relacionado com a dualidade e a cooperação, o 2 trata da forma como interagimos com os outros. Pessoas com este número são diplomáticas e sensíveis, mas precisam ter cuidado para não sacrificar suas próprias necessidades em nome da harmonia.",
-                    3: "O número 3 simboliza a Beleza e a Ação. É a energia da transformação e da comunicação. Pessoas com este número são expressivas, alegres e inspiradoras. O desafio é manter o foco e não se dispersar, canalizando sua energia para o que realmente importa.",
-                    4: "O número 4 é o Desafio. Este número está ligado à forma como lidamos com os obstáculos e o que nos impede de avançar. Pessoas com este número são práticas, disciplinadas e fortes. O desafio é não se tornar rígido e aprender a se adaptar.",
-                    5: "O número 5 representa o Corpo Físico. É a energia da aventura, mudança e liberdade. Pessoas com este número são adaptáveis, versáteis e buscam novas experiências. O desafio é encontrar um equilíbrio entre a liberdade e o compromisso, evitando a instabilidade.",
-                    6: "O número 6 simboliza o Arco da Vida. Está ligado à proteção, à intuição e à responsabilidade. Pessoas com este número são protetoras e têm um forte senso de responsabilidade. O desafio é confiar em sua intuição e não carregar o mundo nas costas.",
-                    7: "O número 7 é o aspecto da Sabedoria. É a energia da introspecção, da espiritualidade e do conhecimento. Pessoas com este número são introspectivas e buscam a verdade. O desafio é não se isolar e compartilhar sua sabedoria com o mundo.",
-                    8: "O número 8 representa a Força Vital. Este número está relacionado à energia e ao poder interior. Pessoas com este número são determinadas e fortes, com grande poder de manifestação. O desafio é usar essa força de forma construtiva, evitando a tirania.",
-                    9: "O número 9 simboliza o Aspecto da Missão. Representa o serviço, a compaixão e a busca por um propósito maior. Pessoas com este número são altruístas e inspiradoras. O desafio é aceitar sua missão e servir aos outros com alegria, sem se sobrecarregar."
-                };
-
-                const interpretationText = placeholderTheory[domNumber] || "Nenhuma interpretação encontrada para este número.";
-                interpretationDiv.innerHTML += `<p>${interpretationText}</p>`;
-                hideLoading();
-            }
-
-            function showLoading() {
-                resultsDiv.classList.remove('hidden');
-            }
-
-            function hideLoading() {
-                loadingDiv.classList.add('hidden');
-            }
         });
     </script>
+
 </body>
 </html>
 
 
-
-
-        });
-    </script>
-</body>
-</html>
