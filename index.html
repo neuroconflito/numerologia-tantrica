@@ -48,6 +48,18 @@
             const domNumberDiv = document.getElementById('domNumber');
             const interpretationDiv = document.getElementById('interpretation');
 
+            const interpretations = {
+                1: "O número 1 reflete sua identidade e o modo como você se vê.",
+                2: "O número 2 mostra sua habilidade de se conectar e interagir com os outros.",
+                3: "O número 3 representa a sua criatividade e expressividade.",
+                4: "O número 4 está relacionado à disciplina e organização, como você constrói sua vida.",
+                5: "O número 5 indica sua busca por liberdade e adaptação às mudanças.",
+                6: "O número 6 reflete sua responsabilidade e cuidado com os outros.",
+                7: "O número 7 simboliza sabedoria, introspecção e sua busca por conhecimento.",
+                8: "O número 8 está relacionado à sua capacidade de manifestação e poder pessoal.",
+                9: "O número 9 representa a compaixão e a busca por um propósito maior."
+            };
+
             calculateButton.addEventListener('click', () => {
                 const birthdateValue = birthdateInput.value;
                 if (!birthdateValue) {
@@ -69,10 +81,10 @@
                 const totalSum = calculateNumerology(day + month + year, 0, 0);
 
                 interpretationDiv.innerHTML = `
-                    <p><strong>Soma do Dia:</strong> ${day} = ${daySum}</p>
-                    <p><strong>Soma do Mês:</strong> ${month} = ${monthSum}</p>
-                    <p><strong>Soma do Ano:</strong> ${year} = ${yearSum}</p>
-                    <p><strong>Soma Total:</strong> ${day + month + year} = ${totalSum}</p>
+                    <p><strong>Soma do Dia:</strong> ${day} = ${daySum} - ${interpretations[daySum]}</p>
+                    <p><strong>Soma do Mês:</strong> ${month} = ${monthSum} - ${interpretations[monthSum]}</p>
+                    <p><strong>Soma do Ano:</strong> ${year} = ${yearSum} - ${interpretations[yearSum]}</p>
+                    <p><strong>Soma Total:</strong> ${day + month + year} = ${totalSum} - ${interpretations[totalSum]}</p>
                 `;
                 resultsDiv.classList.remove('hidden');
             });
@@ -106,5 +118,3 @@
 
 </body>
 </html>
-
-
