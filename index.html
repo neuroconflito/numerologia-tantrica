@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora de Numerologia Tântrica</title>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Numerologia Tântrica</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
 
@@ -60,30 +60,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const interpretationDiv = document.getElementById('interpretation');
 
     const interpretations = {
-        1: "Função: Sua conexão mais íntima com o divino, a fonte da existência.
-● Qualidades Desenvolvidas: Liberdade absoluta, sabedoria total lucidez plena,
-autenticidade, criatividade, humildade esvaziamento de ego.
-● Disfunções: Anseio por liberdade resultando em teimosia, resistência,
-exacerbação da racionalidade frieza emocional, busca externa por autenticidade,
-autoimportância.
-● Chakra Relacionado: Muladhara Base e Anahata Coração.
-● Práticas Sugeridas:
-○ Exercícios:
-■ Equilíbrio Cabeça-Coração: Mãos unidas no coração, inspirar com
-as mãos unidas e exalar abrindo os braços vigorosamente pela boca
-(1-3 minutos).
-■ Desbloqueio do Coração: (Mesmo movimento, mas com respiração
-pelo nariz).
-○ Meditação: Mantra "Sat Kar Tar" (3 a 11 minutos). Mãos: abrir para "Sat",
-recolher para "Kar", abrir para "Tar".",
-        2: "O número 2 mostra sua habilidade de se conectar e interagir com os outros.",
-        3: "O número 3 representa a sua criatividade e expressividade.",
-        4: "O número 4 está relacionado à disciplina e organização, como você constrói sua vida.",
-        5: "O número 5 indica sua busca por liberdade e adaptação às mudanças.",
-        6: "O número 6 reflete sua responsabilidade e cuidado com os outros.",
-        7: "O número 7 simboliza sabedoria, introspecção e sua busca por conhecimento.",
-        8: "O número 8 está relacionado à sua capacidade de manifestação e poder pessoal.",
-        9: "O número 9 representa a compaixão e a busca por um propósito maior."
+        1: "Corpo Espiritual (Corpo 1)\nFunção: Sua conexão mais íntima com o divino, a fonte da existência.\nQualidades Desenvolvidas: Liberdade absoluta, sabedoria total (lucidez plena), autenticidade, criatividade, humildade (esvaziamento do ego).\nDisfunções: Anseio por liberdade (resultando em teimosia/resistência), exacerbando a racionalidade (frieza emocional).\nChakra Relacionado: Muladhara (Base) e Anahata (Coração).\nPráticas: Exercício 'Equilíbrio Cabeça-Coração', Mantra 'Sat Kar Tar'.",
+        2: "Mente Negativa (Corpo 2)\nFunção: Percepção do que é desarmônico para proteger a possibilidade de comunhão e conexão profunda.\nQualidades Desenvolvidas: Comunhão, afetuosidade profunda, autonomia afetiva, percepção aguçada do negativo.\nDisfunções: Exagero na avaliação do negativo.\nChakra Relacionado: Svadhisthana (Sacral).\nPráticas: Exercício 'Movimento de Coluna com Retenção de Ar', Mantra 'Aré Guru Aré Guru Wahe Guru Aré Djio'.",
+        3: "Mente Positiva (Corpo 3)\nFunção: Enxergar o núcleo luminoso e harmônico em tudo.\nQualidades Desenvolvidas: Clareza, assertividade, confiança, positivismo.\nDisfunções: Busca por aprovação e autoritarismo.\nChakra Relacionado: Manipura (Plexo Solar).\nPráticas: Exercício 'Torção da Coluna', Mantra 'Om So Ham'.",
+        4: "Mente Neutra (Corpo 4)\nFunção: Percepção imparcial que integra aspectos positivos e negativos.\nQualidades Desenvolvidas: Visão holística, estabilidade, serenidade.\nDisfunções: Oscilação entre o positivo e o negativo, rigidez.\nChakra Relacionado: Anahata (Coração).\nPráticas: Exercício 'Carregar Peso', Mantra 'Guru Guru Wahe Guru'.",
+        5: "Corpo Físico (Corpo 5)\nFunção: Estruturação da consciência no plano físico.\nQualidades Desenvolvidas: Ação autêntica, comunicação, dedicação a causas divinas.\nDisfunções: Sentir-se destacado do todo.\nChakra Relacionado: Vishuddha (Garganta).\nPráticas: Exercício 'Desenho do 8', Mantra 'Adi Guray Nameh'.",
+        6: "Corpo Auréola (Corpo 6)\nFunção: Campo eletromagnético protetor que amplifica a intuição.\nQualidades Desenvolvidas: Proteção psíquica, clareza mental.\nDisfunções: Dispersão mental.\nChakra Relacionado: Ajna (Terceiro Olho).\nPráticas: Exercício 'Garras Cruzadas', Mantra 'Wahe Guru'.",
+        7: "Aura (Corpo 7)\nFunção: Escudo vibracional que protege de energias desarmônicas.\nQualidades Desenvolvidas: Segurança, invulnerabilidade.\nDisfunções: Sensação de peso/desconforto.\nChakra Relacionado: Sistema glandular.\nPráticas: Exercício 'Movimento Horizontal dos Braços', Mantra 'Sa Ta Na Ma'.",
+        8: "Corpo Prânico (Corpo 8)\nFunção: Dinâmica da energia vital que circula nos canais sutis.\nQualidades Desenvolvidas: Vigor, entusiasmo, foco.\nDisfunções: Desânimo, procrastinação.\nChakra Relacionado: Manipura (Plexo Solar).\nPráticas: Exercício 'Respiração Alternada', Mantra 'Aré Guru Aré Guru Wahe Guru'.",
+        9: "Corpo Sutil (Corpo 9)\nFunção: Sensor vibracional que capta informações sutis.\nQualidades Desenvolvidas: Compreensão ampliada, empatia.\nDisfunções: Percepções fragmentadas.\nChakra Relacionado: Sistema glandular.\nPráticas: Exercício 'Varredura Sutil', Mantra 'Wahe Guru'.",
+        10: "Corpo Radiante (Corpo 10)\nFunção: Seu brilho pessoal, a expressão da luz divina.\nQualidades Desenvolvidas: A aura expandida, carisma.\nPráticas: Exercício 'Ficar em Pé', Mantra 'Wahe Guru'.",
+        11: "Corpo 11 (Totalidade dos Corpos)\nFunção: A vivência da totalidade, fusão de todas as qualidades.\nPráticas: Exercício 'Movimento de Coluna com Respiração Coordenada', Mantra 'Mulla Mantra'."
     };
 
     calculateButton.addEventListener('click', () => {
@@ -128,11 +115,12 @@ recolher para "Kar", abrir para "Tar".",
             }
             return sum;
         };
-        return sumDigits(day) + sumDigits(month) + sumDigits(year) > 9 ?
+        return sumDigits(day) + sumDigits(month) + sumDigits(year) > 9 ? 
                sumDigits(sumDigits(day) + sumDigits(month) + sumDigits(year)) :
                sumDigits(day) + sumDigits(month) + sumDigits(year);
     }
 });
 </script>
+
 </body>
 </html>
